@@ -15,14 +15,19 @@ public class Meow {
     }
 
     public void meow() {
-        String message =
-            MeowConfigConfig.getInstance().prefix
-                + " "
-                + MeowConfigConfig.getInstance().immediatePrefix
-                + MeowConfigConfig.getInstance().meowMessage
-                + MeowConfigConfig.getInstance().immediateSuffix
-                + " "
-                + MeowConfigConfig.getInstance().suffix;
+        StringBuilder builder = new StringBuilder();
+        if (!MeowConfigConfig.getInstance().prefix.isEmpty()) {
+            builder.append(MeowConfigConfig.getInstance().prefix);
+            builder.append(" ");
+        }
+        builder.append(MeowConfigConfig.getInstance().immediatePrefix);
+        builder.append(MeowConfigConfig.getInstance().meowMessage);
+        builder.append(MeowConfigConfig.getInstance().immediateSuffix);
+        if (!MeowConfigConfig.getInstance().suffix.isEmpty()) {
+            builder.append(" ");
+            builder.append(MeowConfigConfig.getInstance().suffix);
+        }
+        String message = builder.toString();
 
         for (int i = 0; i < MeowMethod.values().length; i ++) {
             if (MeowConfigConfig.getInstance().meowMethods[i]) {
