@@ -10,12 +10,8 @@ displayName = "${modName}"
 description = "${modDescription}"
 logoFile = "${modIcon}"
 logoBlur = false
-credits = "thebaum64 for original sword texture in icon"
 authors = "Yedel"
 displayURL = "https://modrinth.com/mod/${modId}/"
-
-[[mixins]]
-config = "${modId}.mixins.json5"
 
 [features.${modId}]
 javaVersion = "${java}"

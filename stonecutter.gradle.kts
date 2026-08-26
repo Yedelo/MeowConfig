@@ -11,12 +11,10 @@ val modId: String by project
 val modIcon: String by project
 val modrinthLogoLink: String by project
 
-stonecutter active "26.2-fabric"
+stonecutter active "26.1-fabric"
 
 stonecutter parameters {
     val loader = current.project.split("-")[1]
-
-    constants["spear"] = current.parsed >= "1.21.11"
 
     constants {
         match(loader, "fabric", "neoforge")

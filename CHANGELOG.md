@@ -1,3 +1,3 @@
-## **2.1.1**
+## **1.0.0**
 
-- Add LGPL-3.0+ license
+- Initial release

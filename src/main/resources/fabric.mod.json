@@ -7,9 +7,6 @@
   "authors": [
     "Yedel"
   ],
-  "contributors": [
-    "thebaum64 for original sword texture in icon"
-  ],
   "contact": {
     "homepage": "https://modrinth.com/mod/${modId}",
     "issues": "https://github.com/Yedelo/${modName}/issues",
@@ -26,16 +23,11 @@
       "at.yedel.${modId}.utils.${modName}ModMenu"
     ]
   },
-  "mixins": [
-    "${modId}.mixins.json5"
-  ],
-  "accessWidener": "${modId}.classtweaker",
   "depends": {
     "java": "${java}",
     "fabricloader": "${fabricLoader}",
     "minecraft": "${minecraft}",
-    "fabric-api": "*",
-    "yet_another_config_lib_v3": "${yacl}"
+    "fabric-api": "*"
   },
   "custom": {
     "modmenu": {

@@ -29,7 +29,6 @@ val modIcon: String by project
 val versionType: String by project
 val license: String by project
 val modrinthId: String by project
-val yaclVersion by CommonProperty<String>()
 val javaVersion by CommonProperty<JavaVersion>()
 val rangedVersion by CommonProperty<Boolean>()
 val maxMc by CommonProperty<String?>()
@@ -37,13 +36,11 @@ val finalFileName by CommonProperty<String>()
 val modrinthReadme by CommonProperty<String>()
 
 dependencies {
-	implementation("dev.isxander:yet-another-config-lib:$yaclVersion")
+
 }
 
 neoForge {
 	version = sc.properties["versions.neoforge"]
-
-	interfaceInjectionData.from("../../neoforge.injections.json")
 
 	mods {
 		register(modId) {
@@ -66,7 +63,6 @@ tasks {
 			set(key, value)
 		}
 		exclude("fabric.mod.json")
-		exclude("$modId.classtweaker")
 
 		fun target(version: String) = "[$version,)"
 		val props = buildMap {
@@ -76,15 +72,13 @@ tasks {
 			register("modIcon", modIcon)
 			register("version", version.toString())
 			register("license", license)
-			register("yacl", target(yaclVersion))
 			register("java", target(javaVersion.majorVersion))
 			register("neoforge", target(sc.properties["versions.neoforge"]))
 			val minecraftDependency =
 				if (rangedVersion) "[${sc.current.version},${maxMc}]" else "[${sc.current.version}]"
 			register("minecraft", minecraftDependency)
-			register("mixinJava", "JAVA_${javaVersion.majorVersion}")
 		}
-		filesMatching(listOf("META-INF/neoforge.mods.toml", "$modId.mixins.json5")) { expand(props) }
+		filesMatching(listOf("META-INF/neoforge.mods.toml")) { expand(props) }
 
         outputs.upToDateWhen { false }
 	}
@@ -122,8 +116,6 @@ publishMods {
 		else {
 			minecraftVersions.add(sc.current.version)
 		}
-
-		requires("yacl")
 	}
 }
 

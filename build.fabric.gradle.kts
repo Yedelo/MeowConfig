@@ -27,7 +27,7 @@ val modIcon: String by project
 val versionType: String by project
 val license: String by project
 val modrinthId: String by project
-val yaclVersion by CommonProperty<String>()
+
 val javaVersion by CommonProperty<JavaVersion>()
 val rangedVersion by CommonProperty<Boolean>()
 val maxMc by CommonProperty<String?>()
@@ -41,14 +41,10 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("versions.fabricApi")}")
 
 	modApi("com.terraformersmc:modmenu:${property("versions.modMenu")}")
-	modImplementation("dev.isxander:yet-another-config-lib:$yaclVersion")
+
 }
 
 loom {
-	accessWidenerPath = sc.process(
-		rootProject.file("src/main/resources/$modId.classtweaker"),
-		"build/processed.classtweaker"
-	)
 	runConfigs.all {
 		runDir = "../../run"
 	}
@@ -70,15 +66,13 @@ tasks {
 			register("modIcon", modIcon)
 			register("version", version.toString())
 			register("license", license)
-			register("yacl", target(yaclVersion))
 			register("java", target(javaVersion.majorVersion))
 			register("fabricLoader", target(sc.properties["versions.fabricLoader"]))
 			val minecraftDependency =
 				if (rangedVersion) ">=${sc.current.version} <=${maxMc}" else sc.current.version
 			register("minecraft", minecraftDependency)
-			register("mixinJava", "JAVA_${javaVersion.majorVersion}")
 		}
-		filesMatching(listOf("fabric.mod.json", "$modId.mixins.json5")) { expand(props) }
+		filesMatching(listOf("fabric.mod.json")) { expand(props) }
 
         outputs.upToDateWhen { false }
 	}
@@ -118,7 +112,6 @@ publishMods {
 		}
 
 		requires("fabric-api")
-		requires("yacl")
 		optional("modmenu")
 	}
 }
