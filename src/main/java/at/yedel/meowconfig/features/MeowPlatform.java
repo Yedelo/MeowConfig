@@ -16,7 +16,9 @@ public class MeowPlatform {
     }
 
     public void sendChatMessage(String message) {
-        Minecraft.getInstance().player.connection.sendChat(message);
+        if (Minecraft.getInstance().player != null) {
+            Minecraft.getInstance().player.connection.sendChat(message);
+        }
     }
 
     public void receiveChatMessage(String message) {
