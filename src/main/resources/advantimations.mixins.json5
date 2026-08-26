@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "package": "at.yedel.${modId}.mixin",
+  "compatibilityLevel": "${mixinJava}",
+  "client": [
+    "AvatarRendererMixin",
+    "EntityRenderStateMixin",
+    "CameraOverlaysMixin",
+    "HumanoidMobRendererMixin",
+    "HumanoidModelMixin",
+    "IsUsingItemMixin",
+    "ItemInHandRendererMixin",
+    /*? < 1.21.9 || >= 26.2 {*/ "EntityRenderDispatcherMixin",
+    /*?} else {*//*"LevelRendererMixin",*//*?}*/
+    "LivingEntityRendererMixin",
+    "MinecraftMixin",
+    "PlayerItemInHandLayerMixin",
+    /*? if spear {*/ "SpearAnimationsMixin", /*?}*/
+    "UseCycleMixin"
+  ],
+  // hello comment
+  /* multiline comment */
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
