@@ -1,4 +1,4 @@
-package at.yedel.meowconfig.features;
+package at.yedel.meowconfig.utils;
 
 
 

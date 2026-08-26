@@ -1,8 +1,9 @@
-package at.yedel.meowconfig.features;
+package at.yedel.meowconfig.triggers;
 
 
 
 import at.yedel.meowconfig.config.MeowConfigConfig;
+import at.yedel.meowconfig.features.Meow;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

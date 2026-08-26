@@ -1,9 +1,9 @@
-package at.yedel.meowconfig.features;
+package at.yedel.meowconfig.triggers;
 
 
 
-import at.yedel.meowconfig.MeowConfig;
 import at.yedel.meowconfig.config.MeowConfigConfig;
+import at.yedel.meowconfig.features.Meow;
 import org.polyfrost.oneconfig.api.event.v1.EventManager;
 import org.polyfrost.oneconfig.api.event.v1.events.ChatEvent;
 

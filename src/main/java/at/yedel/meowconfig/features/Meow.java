@@ -2,8 +2,8 @@ package at.yedel.meowconfig.features;
 
 
 
-import at.yedel.meowconfig.MeowConfig;
 import at.yedel.meowconfig.config.MeowConfigConfig;
+import at.yedel.meowconfig.utils.MeowMethod;
 
 
 
