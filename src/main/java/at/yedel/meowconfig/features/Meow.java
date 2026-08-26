@@ -29,7 +29,7 @@ public class Meow {
         }
         String message = builder.toString();
 
-        boolean meowed;
+        boolean meowed = false;
         for (int i = 0; i < MeowMethod.values().length; i ++) {
             if (MeowConfigConfig.getInstance().meowMethods[i]) {
                 MeowMethod meowMethod = MeowMethod.values()[i];
