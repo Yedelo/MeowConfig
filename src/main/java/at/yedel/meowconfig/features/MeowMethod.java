@@ -2,7 +2,6 @@ package at.yedel.meowconfig.features;
 
 
 
-import at.yedel.meowconfig.MeowConfig;
 import at.yedel.meowconfig.config.MeowConfigConfig;
 
 import java.util.function.Consumer;
@@ -24,6 +23,8 @@ public enum MeowMethod {
     }
 
     public void meow(String message) {
-        meower.accept(message);
+        MeowPlatform.getInstance().schedule(() -> {
+            meower.accept(message);
+        });
     }
 }

@@ -7,6 +7,8 @@ import at.yedel.meowconfig.config.MeowConfigConfig;
 import org.polyfrost.oneconfig.api.event.v1.EventManager;
 import org.polyfrost.oneconfig.api.event.v1.events.ChatEvent;
 
+import java.util.Objects;
+
 
 
 public class MeowChatPatterns {
@@ -20,6 +22,12 @@ public class MeowChatPatterns {
         EventManager.register(ChatEvent.Receive.class, (event) -> {
             if (MeowConfigConfig.getInstance().enabled && MeowConfigConfig.getInstance().meowOnChatPatterns) {
                 String message = event.getFullyUnformattedMessage();
+                for (String chatMessage: MeowConfigConfig.getInstance().chatMessages) {
+                    if (Objects.equals(message, chatMessage)) {
+                        Meow.getInstance().meow();
+                        return;
+                    }
+                }
                 for (String chatPattern: MeowConfigConfig.getInstance().chatPatterns) {
                     if (message.matches(chatPattern)) {
                         Meow.getInstance().meow();

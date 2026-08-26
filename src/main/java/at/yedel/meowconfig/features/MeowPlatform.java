@@ -22,12 +22,14 @@ public class MeowPlatform {
     }
 
     public void receiveChatMessage(String message) {
-        Minecraft.getInstance().schedule(() -> {
-            Platform.compatibility().displayChatMessage(message);
-        });
+        Platform.compatibility().displayChatMessage(message);
     }
 
     public void receiveNotification(String message) {
         Notifications.info("MeowConfig", message);
+    }
+
+    public void schedule(Runnable runnable) {
+        Minecraft.getInstance().schedule(runnable);
     }
 }

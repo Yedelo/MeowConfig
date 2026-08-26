@@ -3,8 +3,6 @@ package at.yedel.meowconfig.config;
 
 
 import at.yedel.meowconfig.features.Meow;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.polyfrost.oneconfig.api.config.v1.Config;
 import org.polyfrost.oneconfig.api.config.v1.annotations.*;
 import org.polyfrost.oneconfig.api.config.v1.annotations.Number;
@@ -57,18 +55,25 @@ public class MeowConfigConfig extends Config {
     public int meowInterval = 60;
 
     @Switch(
-        title = "Meow on Chat Patterns",
-        description = "Meow in response to chat patterns.",
+        title = "Meow on Chat",
+        description = "Meow in response to chat messages and patterns.",
         category = "Triggers"
     )
     public boolean meowOnChatPatterns = false;
+
+    @TextList(
+        title = "Chat Messages",
+        description = "The chat messages to meow to.",
+        category = "Triggers"
+    )
+    public String[] chatMessages = {"From [MVP+] Yedel: meow"};
 
     @TextList(
         title = "Chat Patterns",
         description = "The chat patterns to meow to.",
         category = "Triggers"
     )
-    public String[] chatPatterns = {"From [MVP+] Yedel: meow"};
+    public String[] chatPatterns = {};
 
     @MultiSelectDropdown(
         title = "Meow Methods",
