@@ -29,11 +29,17 @@ public class Meow {
         }
         String message = builder.toString();
 
+        boolean meowed;
         for (int i = 0; i < MeowMethod.values().length; i ++) {
             if (MeowConfigConfig.getInstance().meowMethods[i]) {
                 MeowMethod meowMethod = MeowMethod.values()[i];
                 meowMethod.meow(message);
+                meowed = true;
             }
+        }
+        if (meowed) {
+            MeowTracking.getInstance().incrementMeows();
+            MeowTracking.getInstance().incrementCharacters(message.length());
         }
     }
 }

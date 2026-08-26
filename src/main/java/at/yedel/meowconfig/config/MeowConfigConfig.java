@@ -131,4 +131,10 @@ public class MeowConfigConfig extends Config {
         category = "Customization"
     )
     public String sendSuffix = "";
+
+    @Include
+    public int meows;
+
+    @Include
+    public int characters;
 }
