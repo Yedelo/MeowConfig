@@ -20,7 +20,9 @@ public class MeowPlatform {
     }
 
     public void receiveChatMessage(String message) {
-        Platform.compatibility().displayChatMessage(message);
+        Minecraft.getInstance().schedule(() -> {
+            Platform.compatibility().displayChatMessage(message);
+        });
     }
 
     public void receiveNotification(String message) {
