@@ -3,7 +3,7 @@ versions.oneconfig = "1.1.7"
 
 ["26.1-fabric"]
 versioning = "range"
-mc.max = "26.1.2"
+mc.max = "26.2"
 versions.fabricApi = "0.145.1+26.1"
 versions.modMenu = "18.0.0"
 versions.yacl = "3.9.4"
