@@ -18,16 +18,14 @@
   "entrypoints": {
     "client": [
       "at.yedel.${modId}.${modName}"
-    ],
-    "modmenu": [
-      "at.yedel.${modId}.utils.${modName}ModMenu"
     ]
   },
   "depends": {
     "java": "${java}",
     "fabricloader": "${fabricLoader}",
     "minecraft": "${minecraft}",
-    "fabric-api": "*"
+    "fabric-api": "*",
+    "oneconfigv1": "${oneconfig}"
   },
   "custom": {
     "modmenu": {

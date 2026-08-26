@@ -12,8 +12,14 @@ plugins {
 }
 
 repositories {
+	google()
 	maven("https://maven.terraformersmc.com/releases/")
 	maven("https://maven.isxander.dev/releases")
+	maven("https://repo.polyfrost.org/releases")
+	maven("https://repo.polyfrost.org/snapshots")
+	maven("https://api.modrinth.com/maven") {
+		content { includeGroup("maven.modrinth") }
+	}
 }
 
 // in stonecutter.gradle.kts
@@ -29,6 +35,7 @@ val license: String by project
 val modrinthId: String by project
 
 val javaVersion by CommonProperty<JavaVersion>()
+val oneconfigVersion by CommonProperty<String>()
 val rangedVersion by CommonProperty<Boolean>()
 val maxMc by CommonProperty<String?>()
 val finalFileName by CommonProperty<String>()
@@ -40,6 +47,7 @@ dependencies {
 	modImplementation("net.fabricmc:fabric-loader:${property("versions.fabricLoader")}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("versions.fabricApi")}")
 
+	implementation("org.polyfrost.oneconfig:${sc.current.version}-fabric:$oneconfigVersion")
 	modApi("com.terraformersmc:modmenu:${property("versions.modMenu")}")
 
 }
@@ -56,7 +64,6 @@ tasks {
 			inputs.property(key, value)
 			set(key, value)
 		}
-		exclude("META-INF/neoforge.mods.toml")
 
 		fun target(version: String) = ">=$version"
 		val props = buildMap {
@@ -71,6 +78,7 @@ tasks {
 			val minecraftDependency =
 				if (rangedVersion) ">=${sc.current.version} <=${maxMc}" else sc.current.version
 			register("minecraft", minecraftDependency)
+			register("oneconfig", target(oneconfigVersion))
 		}
 		filesMatching(listOf("fabric.mod.json")) { expand(props) }
 
@@ -112,6 +120,7 @@ publishMods {
 		}
 
 		requires("fabric-api")
+		requires("oneconfig")
 		optional("modmenu")
 	}
 }
