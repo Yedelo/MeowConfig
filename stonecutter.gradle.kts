@@ -42,11 +42,6 @@ stonecutter parameters {
         operator fun getValue(thisRef: Any?, property: KProperty<*>): T = value
     }
 
-    val yaclVersion by Declare(run {
-        val rawVersionProperty = properties.get<String>("versions.yacl")
-        if (rawVersionProperty.endsWith(loader)) rawVersionProperty else "$rawVersionProperty+${current.project}"
-    })
-
     val javaVersion by Declare(run {
         val mc = current.parsed
         when {
