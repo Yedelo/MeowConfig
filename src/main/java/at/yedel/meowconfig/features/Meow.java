@@ -38,19 +38,28 @@ public class Meow {
         }
     }
 
-    private static String getFullMessage() {
+    private String getFullMessage() {
         StringBuilder builder = new StringBuilder();
         if (!MeowConfigConfig.getInstance().prefix.isEmpty()) {
-            builder.append(MeowConfigConfig.getInstance().prefix);
-            builder.append(" ");
+            append(builder, MeowConfigConfig.getInstance().prefix);
+            append(builder, " ");
         }
-        builder.append(MeowConfigConfig.getInstance().immediatePrefix);
-        builder.append(MeowConfigConfig.getInstance().meowMessage);
-        builder.append(MeowConfigConfig.getInstance().immediateSuffix);
+        append(builder, MeowConfigConfig.getInstance().immediatePrefix);
+        append(builder, MeowConfigConfig.getInstance().meowMessage);
+        append(builder, MeowConfigConfig.getInstance().immediateSuffix);
         if (!MeowConfigConfig.getInstance().suffix.isEmpty()) {
-            builder.append(" ");
-            builder.append(MeowConfigConfig.getInstance().suffix);
+            append(builder, " ");
+            append(builder, MeowConfigConfig.getInstance().suffix);
         }
         return builder.toString();
+    }
+
+    private void append(StringBuilder builder, String string) {
+        builder.append(
+            string
+                .replace("${meows}", String.valueOf(MeowTracking.getInstance().getMeows()))
+                .replace("${characters}", String.valueOf(MeowTracking.getInstance().getCharacters()))
+                .replace("${summary}", MeowTracking.getInstance().getSummary())
+        );
     }
 }

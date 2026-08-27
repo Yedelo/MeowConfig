@@ -94,6 +94,12 @@ public class MeowConfigConfig extends Config {
     )
     public boolean[] meowMethods = new boolean[] {false, true, true};
 
+    @Info(
+        title = "Text can include ${meows}, ${characters}, and ${summary} to template stats.",
+        category = "Customization"
+    )
+    public String info$1;
+
     @Text(
         title = "Send Prefix",
         description = "For the \"Send Chat Message\" method, this will add the following text to the start of the message. Note that there will be no space added after.",

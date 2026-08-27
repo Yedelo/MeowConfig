@@ -15,6 +15,18 @@ public class MeowTracking {
 
     private MeowTracking() {}
 
+    public int getMeows() {
+        return MeowConfigConfig.getInstance().meows;
+    }
+
+    public int getCharacters() {
+        return MeowConfigConfig.getInstance().characters;
+    }
+
+    public String getSummary() {
+        return getMeows() + " meows, " + getCharacters() + " characters";
+    }
+
     public void incrementMeows() {
         MeowConfigConfig.getInstance().meows ++;
         MeowConfigConfig.getInstance().save();
@@ -23,9 +35,5 @@ public class MeowTracking {
     public void incrementCharacters(int characters) {
         MeowConfigConfig.getInstance().characters += characters;
         MeowConfigConfig.getInstance().save();
-    }
-
-    public String getSummary() {
-        return MeowConfigConfig.getInstance().meows + " meows, " + MeowConfigConfig.getInstance().characters + " characters";
     }
 }
