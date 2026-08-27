@@ -96,7 +96,7 @@ public class MeowConfigConfig extends Config {
 
     @Text(
         title = "Send Prefix",
-        description = "For the \"Send Chat Message\" method, this will add the following text to the start of the message.",
+        description = "For the \"Send Chat Message\" method, this will add the following text to the start of the message. Note that there will be no space added after.",
         category = "Customization"
     )
     public String sendPrefix = "";
@@ -138,7 +138,7 @@ public class MeowConfigConfig extends Config {
 
     @Text(
         title = "Send Suffix",
-        description = "For the \"Send Chat Message\" method, this will add the following text to the end of the message.",
+        description = "For the \"Send Chat Message\" method, this will add the following text to the end of the message. Note that there will be no space added before.",
         category = "Customization"
     )
     public String sendSuffix = "";
