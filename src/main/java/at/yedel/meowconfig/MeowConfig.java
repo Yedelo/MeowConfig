@@ -22,9 +22,6 @@ public class MeowConfig implements ClientModInitializer {
 		return INSTANCE;
 	}
 
-	//@TODO make this fancy later
-	public static final Component LOGO = Component.literal("[MeowConfig]");
-
 	private void initialize() {
 		INSTANCE = this;
 		MeowConfigConfig.getInstance();

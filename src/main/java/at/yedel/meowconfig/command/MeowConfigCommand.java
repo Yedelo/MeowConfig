@@ -4,6 +4,8 @@ package at.yedel.meowconfig.command;
 
 import at.yedel.meowconfig.config.MeowConfigConfig;
 import at.yedel.meowconfig.features.Meow;
+import at.yedel.meowconfig.features.MeowTracking;
+import at.yedel.meowconfig.utils.MeowPlatform;
 import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Command;
 import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Handler;
 import org.polyfrost.oneconfig.utils.v1.dsl.ScreensKt;
@@ -30,5 +32,12 @@ public class MeowConfigCommand {
     )
     public void meow() {
         Meow.getInstance().meow();
+    }
+
+    @Handler(
+        description = "Shows tracked meowing stats."
+    )
+    public void stats() {
+        MeowPlatform.getInstance().receiveChatMessageWithLogo(MeowTracking.getInstance().getSummary());
     }
 }

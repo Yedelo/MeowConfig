@@ -3,9 +3,11 @@ package at.yedel.meowconfig.config;
 
 
 import at.yedel.meowconfig.features.Meow;
+import at.yedel.meowconfig.features.MeowTracking;
 import org.polyfrost.oneconfig.api.config.v1.Config;
 import org.polyfrost.oneconfig.api.config.v1.annotations.*;
 import org.polyfrost.oneconfig.api.config.v1.annotations.Number;
+import org.polyfrost.oneconfig.api.notifications.v1.Notifications;
 
 
 
@@ -25,6 +27,15 @@ public class MeowConfigConfig extends Config {
         description = "Global toggle for the mod."
     )
     public boolean enabled = true;
+
+    @Button(
+        title = "Display Tracking Stats",
+        description = "Display meow tracking stats.",
+        text = "Display"
+    )
+    public void displayTrackingStats() {
+        Notifications.info("MeowConfig", MeowTracking.getInstance().getSummary());
+    }
 
     @Button(
         title = "Meow Button",
@@ -131,6 +142,32 @@ public class MeowConfigConfig extends Config {
         category = "Customization"
     )
     public String sendSuffix = "";
+
+    @Switch(
+        title = "Play Sound on Meow",
+        description = "Plays one of the following sounds when meowing.",
+        category = "Effects"
+    )
+    public boolean playSoundOnMeow = false;
+
+    @TextList(
+        title = "Meow Sounds",
+        description = "Sounds to play when meowing.",
+        category = "Effects"
+    )
+    public String[] meowSounds = {"entity.cat.ambient"};
+
+    @Number(
+        title = "Meow Volume",
+        category = "Effects"
+    )
+    public float meowVolume = 1f;
+
+    @Number(
+        title = "Meow Pitch",
+        category = "Effects"
+    )
+    public float meowPitch = 1f;
 
     @Include
     public int meows;

@@ -4,6 +4,7 @@ package at.yedel.meowconfig.features;
 
 import at.yedel.meowconfig.config.MeowConfigConfig;
 import at.yedel.meowconfig.utils.MeowMethod;
+import at.yedel.meowconfig.utils.MeowPlatform;
 
 
 
@@ -15,6 +16,29 @@ public class Meow {
     }
 
     public void meow() {
+        String message = getFullMessage();
+        boolean meowed = false;
+        for (int i = 0; i < MeowMethod.values().length; i ++) {
+            if (MeowConfigConfig.getInstance().meowMethods[i]) {
+                MeowMethod meowMethod = MeowMethod.values()[i];
+                meowMethod.meow(message);
+                meowed = true;
+            }
+        }
+        if (meowed) {
+            if (MeowConfigConfig.getInstance().playSoundOnMeow) {
+                String[] meowSounds = MeowConfigConfig.getInstance().meowSounds;
+                if (meowSounds.length > 0) {
+                    String meowSound = meowSounds[(int) (Math.random() * meowSounds.length)];
+                    MeowPlatform.getInstance().playSound(meowSound, MeowConfigConfig.getInstance().meowVolume, MeowConfigConfig.getInstance().meowPitch);
+                }
+            }
+            MeowTracking.getInstance().incrementMeows();
+            MeowTracking.getInstance().incrementCharacters(message.length());
+        }
+    }
+
+    private static String getFullMessage() {
         StringBuilder builder = new StringBuilder();
         if (!MeowConfigConfig.getInstance().prefix.isEmpty()) {
             builder.append(MeowConfigConfig.getInstance().prefix);
@@ -27,19 +51,6 @@ public class Meow {
             builder.append(" ");
             builder.append(MeowConfigConfig.getInstance().suffix);
         }
-        String message = builder.toString();
-
-        boolean meowed = false;
-        for (int i = 0; i < MeowMethod.values().length; i ++) {
-            if (MeowConfigConfig.getInstance().meowMethods[i]) {
-                MeowMethod meowMethod = MeowMethod.values()[i];
-                meowMethod.meow(message);
-                meowed = true;
-            }
-        }
-        if (meowed) {
-            MeowTracking.getInstance().incrementMeows();
-            MeowTracking.getInstance().incrementCharacters(message.length());
-        }
+        return builder.toString();
     }
 }

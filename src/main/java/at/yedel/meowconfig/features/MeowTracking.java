@@ -24,4 +24,8 @@ public class MeowTracking {
         MeowConfigConfig.getInstance().characters += characters;
         MeowConfigConfig.getInstance().save();
     }
+
+    public String getSummary() {
+        return MeowConfigConfig.getInstance().meows + " meows, " + MeowConfigConfig.getInstance().characters + " characters";
+    }
 }
