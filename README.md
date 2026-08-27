@@ -14,6 +14,10 @@ Blazingly-fast, customizable and tracked meows
 
 - [Fabric API](https://modrinth.com/mod/fabric-api)
 - [OneConfig](https://modrinth.com/mod/oneconfig)
-- [Mod Menu](https://modrinth.com/mod/modmenu) to reach the config screen (please do it)
 
 ## Features
+
+- **Triggers**: Trigger on intervals, chat messages, or manually.
+- **Customization**: Customize how meows get presented and customize every last detail of the message.
+- **Effects**: Play different sounds on meows.
+- **Tracking**: Track different meowing statistics.
