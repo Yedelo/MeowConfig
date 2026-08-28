@@ -8,7 +8,9 @@
 
 ![modrinth latest version](https://img.shields.io/modrinth/v/2KODyVqu?label=modrinth)
 
-Blazingly-fast, customizable and tracked meows
+As a community of meowers, we often have more problems than one may see.
+We may forget to meow, feel less self-expression, receive unsatisfying feedback, or have trouble quantifying the extent of our meows.
+Fear not, because MeowConfig handles all that for you!
 
 ## Dependencies
 
