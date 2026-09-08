@@ -17,21 +17,12 @@ stonecutter parameters {
     val loader = current.project.split("-")[1]
     val legacy = current.parsed <= "1.8.9"
     val modern = !legacy
+
     constants {
         // alrighty
         match(loader, "fabric")
         this["legacy"] = legacy
         this["modern"] = modern
-    }
-
-    replacements {
-        string(current.parsed >= "1.21.11") {
-            replace("ResourceLocation", "Identifier")
-        }
-
-        string(current.parsed < "26.1") {
-            replace("classTweaker v1 official", "classTweaker v1 named")
-        }
     }
 
     val shared = mutableMapOf<String, Any?>()
