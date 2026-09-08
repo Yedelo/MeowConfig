@@ -14,7 +14,6 @@ Fear not, because MeowConfig handles all that for you!
 
 ## Dependencies
 
-- [Fabric API](https://modrinth.com/mod/fabric-api)
 - [OneConfig](https://modrinth.com/mod/oneconfig)
 
 ## Features
