@@ -30,7 +30,7 @@ public class Meow {
                 String[] meowSounds = MeowConfigConfig.getInstance().meowSounds;
                 if (meowSounds.length > 0) {
                     String meowSound = meowSounds[(int) (Math.random() * meowSounds.length)];
-                    MeowPlatform.getInstance().playSound(meowSound, MeowConfigConfig.getInstance().meowVolume, MeowConfigConfig.getInstance().meowPitch);
+                    MeowPlatform.getInstance().playSound(meowSound, MeowConfigConfig.getInstance().meowPitch, MeowConfigConfig.getInstance().meowVolume);
                 }
             }
             MeowTracking.getInstance().incrementMeows();

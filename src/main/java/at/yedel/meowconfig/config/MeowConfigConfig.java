@@ -161,7 +161,7 @@ public class MeowConfigConfig extends Config {
         description = "Sounds to play when meowing.",
         category = "Effects"
     )
-    public String[] meowSounds = {"entity.cat.ambient"};
+    public String[] meowSounds = {/*? if legacy {*//*"mob.cat.meow"*//*?} else {*/"entity.cat.ambient"/*?}*/};
 
     @Number(
         title = "Meow Volume",
