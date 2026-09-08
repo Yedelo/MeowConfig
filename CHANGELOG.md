@@ -1,3 +1,3 @@
-## **1.0.0**
+## **2.0.0-beta.1**
 
-- Initial release
+- Port to 1.8.9 ornithe

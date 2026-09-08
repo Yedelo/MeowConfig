@@ -15,9 +15,13 @@ stonecutter active "26.1-fabric"
 
 stonecutter parameters {
     val loader = current.project.split("-")[1]
-
+    val legacy = current.parsed <= "1.8.9"
+    val modern = !legacy
     constants {
-        match(loader, "fabric", "neoforge")
+        // alrighty
+        match(loader, "fabric")
+        this["legacy"] = legacy
+        this["modern"] = modern
     }
 
     replacements {
@@ -42,21 +46,13 @@ stonecutter parameters {
         operator fun getValue(thisRef: Any?, property: KProperty<*>): T = value
     }
 
-    val javaVersion by Declare(run {
-        val mc = current.parsed
-        when {
-            mc >= "26.1" -> JavaVersion.VERSION_25
-            mc >= "1.20.5" -> JavaVersion.VERSION_21
-            mc >= "1.18" -> JavaVersion.VERSION_17
-            mc >= "1.17" -> JavaVersion.VERSION_16
-            else -> JavaVersion.VERSION_1_8
-        }
-    })
-    val oneconfigVersion by Declare(properties.get<String>("versions.oneconfig"))
-
-    val rangedVersion by Declare(properties.get<String>("versioning") == "range")
-    val maxMc by Declare(if (rangedVersion) properties.get<String>("mc.max") else null)
-
+    val modName by Declare(extra["mod.name"])
+    val modId by Declare(extra["mod.id"])
+    val modDescription by Declare(extra["mod.description"])
+    val modIcon by Declare(extra["modIcon"])
+    val oneconfigVersion by Declare(properties.getAs<String>("versions.oneconfig"))
+    val rangedVersion by Declare(properties.getAs<String>("versioning") == "range")
+    val maxMc by Declare(if (rangedVersion) properties.getAs<String>("mc.max") else null)
     val minecraftTarget by Declare(if (rangedVersion) "${current.version}-$maxMc" else current.version)
     val finalFileName by Declare("$modName-$version+$minecraftTarget-$loader.jar")
 
@@ -64,5 +60,3 @@ stonecutter parameters {
         .replace("src/main/resources/$modIcon", modrinthLogoLink)
     )
 }
-
-// there is a lot of repetition for publishMods between the two buildscripts, but it's just not worth the effort of deduplicating

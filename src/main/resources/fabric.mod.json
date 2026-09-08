@@ -24,7 +24,6 @@
     "java": "${java}",
     "fabricloader": "${fabricLoader}",
     "minecraft": "${minecraft}",
-    "fabric-api": "*",
     "oneconfigv1": "${oneconfig}"
   },
   "custom": {
