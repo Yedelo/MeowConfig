@@ -11,8 +11,8 @@ import me.modmuss50.mpp.ReleaseType
 class CommonProperty<T> {
 	operator fun getValue(thisRef: Any?, property: KProperty<*>): T = (rootProject.extra[sc.current.project] as Map<String, Any?>)[property.name] as T
 }
-val ornithe = sc.current.version == "1.8.9"
-val environment = if (ornithe) "ornithe" else "fabric"
+val ornithe by CommonProperty<Boolean>()
+val environment by CommonProperty<String>()
 val modName by CommonProperty<String>()
 val modId by CommonProperty<String>()
 val modDescription by CommonProperty<String>()
@@ -140,7 +140,7 @@ tasks {
 			val minecraftDependency =
 				if (rangedVersion) ">=${sc.current.version} <=${maxMc}" else sc.current.version
 			register("minecraft", minecraftDependency)
-			register("oneconfigv1", target(oneconfigVersion))
+			register("oneconfig", target(oneconfigVersion))
 		}
 		filesMatching(listOf("fabric.mod.json")) { expand(props) }
 
@@ -167,13 +167,14 @@ java {
 }
 
 publishMods {
+	val env = environment
 	file.set(loomx.modJar.map { it.archiveFile.get() })
 	changelog.set(rootProject.file("CHANGELOG.md").readText())
 	type.set(ReleaseType.of(versionType))
-	modLoaders.add("fabric")
+	modLoaders.add(env)
 
 	modrinth {
-		displayName.set("${project.version.toString()} for Fabric ${sc.current.version}")
+		displayName.set("${project.version.toString()} for ${env.capitalize()} ${sc.current.version}")
 		accessToken = System.getenv("MODRINTH_TOKEN")
 		projectId.set(modrinthId)
 		environment = CLIENT_ONLY
@@ -188,9 +189,7 @@ publishMods {
 			minecraftVersions.add(sc.current.version)
 		}
 
-		requires("fabric-api")
 		requires("oneconfig")
-		optional("modmenu")
 	}
 }
 

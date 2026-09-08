@@ -14,17 +14,6 @@ val modrinthLogoLink: String by project
 stonecutter active "26.1-fabric"
 
 stonecutter parameters {
-    val loader = current.project.split("-")[1]
-    val legacy = current.parsed <= "1.8.9"
-    val modern = !legacy
-
-    constants {
-        // alrighty
-        match(loader, "fabric")
-        this["legacy"] = legacy
-        this["modern"] = modern
-    }
-
     val shared = mutableMapOf<String, Any?>()
     extra[current.project] = shared
 
@@ -37,6 +26,19 @@ stonecutter parameters {
         operator fun getValue(thisRef: Any?, property: KProperty<*>): T = value
     }
 
+    val loader by Declare(current.project.split("-")[1])
+    val ornithe by Declare(current.version == "1.8.9")
+    val environment by Declare(if (ornithe) "ornithe" else "fabric")
+    val legacy by Declare(current.parsed <= "1.8.9")
+    val modern by Declare(!legacy)
+
+    constants {
+        // alrighty
+        match(loader, "fabric")
+        this["legacy"] = legacy
+        this["modern"] = modern
+    }
+
     val modName by Declare(extra["mod.name"])
     val modId by Declare(extra["mod.id"])
     val modDescription by Declare(extra["mod.description"])
@@ -45,7 +47,7 @@ stonecutter parameters {
     val rangedVersion by Declare(properties.getAs<String>("versioning") == "range")
     val maxMc by Declare(if (rangedVersion) properties.getAs<String>("mc.max") else null)
     val minecraftTarget by Declare(if (rangedVersion) "${current.version}-$maxMc" else current.version)
-    val finalFileName by Declare("$modName-$version+$minecraftTarget-$loader.jar")
+    val finalFileName by Declare("$modName-$version+$minecraftTarget-$environment.jar")
 
     val modrinthReadme by Declare(rootProject.file("README.md").readText()
         .replace("src/main/resources/$modIcon", modrinthLogoLink)
