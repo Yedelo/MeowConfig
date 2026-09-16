@@ -1,3 +1,3 @@
-## **2.0.0-beta.1**
+## **1.0.1**
 
-- Port to 1.8.9 ornithe
+- Add 26.3 compatibility
