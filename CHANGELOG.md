@@ -1,3 +1,3 @@
-## **1.0.1**
+## **2.0.0**
 
-- Add 26.3 compatibility
+- Add 1.8.9 ornithe support
